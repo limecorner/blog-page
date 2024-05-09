@@ -1,6 +1,7 @@
 <template>
   <div id="app" class="font-roboto bg-gray-100">
     <navbar></navbar>
+    <router-view />
 
     <div class="px-6 py-8">
       <div class="flex justify-between container mx-auto">
