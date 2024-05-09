@@ -46,6 +46,7 @@
     import Categories from "./components/sections-categories-list";
     import RecentPost from "./components/sections-recent-article";
     import SimpleFooter from "./components/navigation-footer-simple-with-icon";
+    import authorizationAPI from './apis/authorization'
 
     export default {
         name: 'app',
@@ -109,7 +110,18 @@
                     },
                 ]
             }
-        }
+        },
+        methods: {
+            async handleSubmit () {
+                await authorizationAPI.signIn({
+                    email: "user1@gmail.com",
+                    password: "123"
+                })
+            },
+        },
+        created () {
+            this.handleSubmit()
+        },
     }
 </script>
 
