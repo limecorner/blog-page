@@ -41,6 +41,7 @@ import UsersList from './../components/sections-blog-users-list'
 import Categories from './../components/sections-categories-list'
 import RecentPost from './../components/sections-recent-article'
 import authorizationAPI from './../apis/authorization'
+import { Toast } from './../utils/helpers'
 
 export default {
   name: 'Articles',
@@ -74,6 +75,10 @@ export default {
       await authorizationAPI.signIn({
         email: 'user1@gmail.com',
         password: '123'
+      })
+      Toast.fire({
+        icon: 'warning',
+        title: '請確認已填寫所有欄位'
       })
     }
   },
