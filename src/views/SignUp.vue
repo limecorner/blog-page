@@ -146,7 +146,12 @@
           </div>
 
           <div class="mt-6">
+            <LittleSpinner
+              v-if="isProcessing"
+              class="bg-blue-400 hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+            />
             <button
+              v-else
               class="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
             >
               Sign Up
@@ -170,14 +175,19 @@
 <script>
 import authorizationAPI from './../apis/authorization'
 import { Toast } from './../utils/helpers'
+import LittleSpinner from './../components/little-spinner'
 
 export default {
+  components: {
+    LittleSpinner
+  },
   data() {
     return {
       name: '',
       email: '',
       password: '',
-      passwordCheck: ''
+      passwordCheck: '',
+      isProcessing: false
     }
   },
   methods: {
@@ -205,6 +215,8 @@ export default {
           return
         }
 
+        this.isProcessing = true
+
         const { data } = await authorizationAPI.signUp({
           name: this.name,
           email: this.email,
@@ -220,6 +232,7 @@ export default {
           this.$router.push('/signin')
         }
       } catch (error) {
+        this.isProcessing = false
         Toast.fire({
           icon: 'error',
           title: `無法註冊 - ${error.response.data.message}`
