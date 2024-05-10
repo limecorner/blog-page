@@ -1,9 +1,10 @@
 <template>
-  <div id="app" class="font-roboto bg-gray-100">
-    <navbar></navbar>
-    <router-view />
-
-    <simple-footer></simple-footer>
+  <div id="app" class="font-roboto bg-gray-100 h-full">
+    <div class="h-full">
+      <navbar />
+      <router-view class="mt-40" />
+    </div>
+    <simple-footer class="footer" />
   </div>
 </template>
 
@@ -37,5 +38,15 @@ export default {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #2d3748;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+.footer {
+  height: 50px;
+  margin-top: -50px;
 }
 </style>
