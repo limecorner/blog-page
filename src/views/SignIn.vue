@@ -1,5 +1,5 @@
 <template>
-  <div class="container py-5 mx-auto">
+  <div class="container py-5 mx-auto mt-40">
     <div
       class="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 lg:max-w-4xl"
     >
@@ -119,10 +119,10 @@
           <div class="flex items-center justify-between mt-4">
             <span class="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
 
-            <a
-              href="#"
+            <router-link
+              to="/signup"
               class="text-xs text-gray-500 uppercase dark:text-gray-400 hover:underline"
-              >or sign up</a
+              >or sign up</router-link
             >
 
             <span class="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>

@@ -2,7 +2,7 @@
   <div id="app" class="font-roboto bg-gray-100 h-full">
     <div class="h-full">
       <navbar />
-      <router-view class="mt-40" />
+      <router-view />
     </div>
     <simple-footer class="footer" />
   </div>
