@@ -4,7 +4,7 @@
       <div
         class="container flex items-center justify-center min-h-screen px-6 mx-auto"
       >
-        <form class="w-full max-w-md">
+        <form class="w-full max-w-md" @submit.prevent.stop="handleSubmit">
           <div class="flex justify-center mx-auto">
             <img
               class="w-auto h-7 sm:h-8"
@@ -48,9 +48,13 @@
             </span>
 
             <input
-              type="text"
-              class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+              id="name"
+              v-model="name"
+              name="name"
               placeholder="Username"
+              type="text"
+              required
+              class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
             />
           </div>
 
@@ -73,9 +77,13 @@
             </span>
 
             <input
+              id="email"
+              v-model="email"
+              name="email"
+              placeholder="Email"
               type="email"
+              required
               class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
-              placeholder="Email address"
             />
           </div>
 
@@ -98,9 +106,13 @@
             </span>
 
             <input
-              type="password"
-              class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+              id="password"
+              v-model="password"
+              name="password"
               placeholder="Password"
+              type="password"
+              required
+              class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
             />
           </div>
 
@@ -123,9 +135,13 @@
             </span>
 
             <input
-              type="password"
-              class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+              id="passwordCheck"
+              v-model="passwordCheck"
+              name="passwordCheck"
               placeholder="Confirm Password"
+              type="password"
+              required
+              class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
             />
           </div>
 
@@ -150,3 +166,66 @@
     </section>
   </div>
 </template>
+
+<script>
+import authorizationAPI from './../apis/authorization'
+import { Toast } from './../utils/helpers'
+
+export default {
+  data() {
+    return {
+      name: '',
+      email: '',
+      password: '',
+      passwordCheck: ''
+    }
+  },
+  methods: {
+    async handleSubmit() {
+      try {
+        if (
+          !this.name.trim() ||
+          !this.email.trim() ||
+          !this.password.trim() ||
+          !this.passwordCheck.trim()
+        ) {
+          Toast.fire({
+            icon: 'warning',
+            title: '請確認已填寫所有欄位'
+          })
+          return
+        }
+
+        if (this.password !== this.passwordCheck) {
+          Toast.fire({
+            icon: 'error',
+            title: '兩次輸入的密碼不同'
+          })
+          this.passwordCheck = ''
+          return
+        }
+
+        const { data } = await authorizationAPI.signUp({
+          name: this.name,
+          email: this.email,
+          password: this.password,
+          passwordCheck: this.passwordCheck
+        })
+
+        if (data.success === true) {
+          Toast.fire({
+            icon: 'success',
+            title: data.message
+          })
+          this.$router.push('/signin')
+        }
+      } catch (error) {
+        Toast.fire({
+          icon: 'error',
+          title: `無法註冊 - ${error.response.data.message}`
+        })
+      }
+    }
+  }
+}
+</script>
