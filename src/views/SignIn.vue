@@ -63,68 +63,118 @@
           <span class="w-1/5 border-b dark:border-gray-400 lg:w-1/4"></span>
         </div> -->
 
-        <div class="mt-4">
-          <label
-            class="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200"
-            for="email"
-            >Email</label
-          >
-          <input
-            id="email"
-            v-model="email"
-            name="email"
-            placeholder="email"
-            type="email"
-            required
-            class="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
-          />
-        </div>
-
-        <div class="mt-4">
-          <div class="flex justify-between">
+        <form @submit.prevent.stop="handleSubmit">
+          <div class="mt-4">
             <label
               class="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200"
-              for="loggingPassword"
-              >Password</label
+              for="email"
+              >Email</label
             >
-            <!-- <a
+            <input
+              id="email"
+              v-model="email"
+              name="email"
+              placeholder="email"
+              type="email"
+              required
+              class="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
+            />
+          </div>
+
+          <div class="mt-4">
+            <div class="flex justify-between">
+              <label
+                class="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200"
+                for="loggingPassword"
+                >Password</label
+              >
+              <!-- <a
               href="#"
               class="text-xs text-gray-500 dark:text-gray-300 hover:underline"
               >Forget Password?</a
             > -->
+            </div>
+
+            <input
+              id="loggingPassword"
+              v-model="password"
+              name="password"
+              placeholder="password"
+              type="password"
+              required
+              class="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
+            />
           </div>
 
-          <input
-            id="loggingPassword"
-            v-model="password"
-            name="password"
-            placeholder="password"
-            type="password"
-            required
-            class="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
-          />
-        </div>
+          <div class="mt-6">
+            <button
+              :disabled="isProcessing"
+              class="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-gray-800 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50"
+            >
+              Sign In
+            </button>
+          </div>
 
-        <div class="mt-6">
-          <button
-            class="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-gray-800 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50"
-          >
-            Sign In
-          </button>
-        </div>
+          <div class="flex items-center justify-between mt-4">
+            <span class="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
 
-        <div class="flex items-center justify-between mt-4">
-          <span class="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
+            <a
+              href="#"
+              class="text-xs text-gray-500 uppercase dark:text-gray-400 hover:underline"
+              >or sign up</a
+            >
 
-          <a
-            href="#"
-            class="text-xs text-gray-500 uppercase dark:text-gray-400 hover:underline"
-            >or sign up</a
-          >
-
-          <span class="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
-        </div>
+            <span class="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
+          </div>
+        </form>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+import authorizationAPI from './../apis/authorization'
+import { Toast } from './../utils/helpers'
+
+export default {
+  data() {
+    return {
+      email: '',
+      password: '',
+      isProcessing: false
+    }
+  },
+  methods: {
+    async handleSubmit() {
+      try {
+        if (!this.email || !this.password) {
+          Toast.fire({
+            icon: 'warning',
+            title: '請填入 email 和 password'
+          })
+          return
+        }
+
+        this.isProcessing = true
+
+        const { data } = await authorizationAPI.signIn({
+          email: this.email,
+          password: this.password
+        })
+
+        if (data.success === true) {
+          localStorage.setItem('token', data.token)
+          this.$router.push('/articles')
+        }
+      } catch (error) {
+        this.isProcessing = false
+        const errorMessage = error.response.data.message
+        Toast.fire({
+          icon: 'error',
+          title: errorMessage ? errorMessage : '輸入的帳號密碼有誤'
+        })
+      }
+    }
+  }
+}
+</script>
