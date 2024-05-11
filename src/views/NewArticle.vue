@@ -9,14 +9,14 @@
             </el-form-item>
             <el-form-item label="Category">
               <el-select
-                v-model="form.category"
+                v-model="form.categoryId"
                 placeholder="please select the category"
               >
                 <el-option
-                  v-for="category in categories"
-                  :key="category"
-                  :label="category"
-                  :value="category"
+                  v-for="{ name, id } in categories"
+                  :key="name"
+                  :label="name"
+                  :value="id"
                 ></el-option>
               </el-select>
             </el-form-item>
@@ -41,7 +41,14 @@
               ></el-input>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" @click="handleSubmit"
+              <el-button v-if="isProcessing" type="primary" class="w-24">
+                <span class="spinner small-spinner"></span>
+              </el-button>
+              <el-button
+                v-else
+                type="primary"
+                class="w-24"
+                @click="handleSubmit()"
                 >Publish</el-button
               >
               <!-- <el-button>Cancel</el-button> -->
@@ -72,8 +79,8 @@ import UsersList from './../components/sections-blog-users-list'
 import Categories from './../components/sections-categories-list'
 import RecentPost from './../components/sections-recent-article'
 import { permissions, categories } from './../constants'
-// import articlesAPI from './../apis/articles'
-// import { Toast } from './../utils/helpers'
+import articlesAPI from './../apis/articles'
+import { Toast } from './../utils/helpers'
 
 export default {
   name: 'Articles',
@@ -86,16 +93,39 @@ export default {
     return {
       form: {
         title: '',
-        category: '',
+        categoryId: '',
         permission: '',
         content: ''
       },
+      isProcessing: false,
       categories,
       permissions
     }
   },
   methods: {
-    async handleSubmit() {}
+    async handleSubmit() {
+      try {
+        this.isProcessing = true
+
+        const { data } = await articlesAPI.postArticles({
+          categoryId: this.form.categoryId,
+          title: this.form.title,
+          permission: this.form.permission,
+          content: this.form.content
+        })
+
+        if (data.success === true) {
+          this.$router.push('/articles')
+        }
+      } catch (error) {
+        this.isProcessing = false
+        const errorMessage = error.response.data.message
+        Toast.fire({
+          icon: 'error',
+          title: errorMessage ? errorMessage : '無法發布文章'
+        })
+      }
+    }
   }
 }
 </script>
@@ -121,5 +151,9 @@ export default {
 
 .el-select-dropdown__wrap {
   overflow: auto;
+}
+.small-spinner {
+  width: 1rem;
+  height: 1rem;
 }
 </style>

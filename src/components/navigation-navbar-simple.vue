@@ -27,6 +27,13 @@
         class="flex flex-col md:flex-row md:-mx-4"
         :class="isOpen ? 'block' : ['hidden', 'md:block']"
       >
+        <router-link
+          to="/new-article"
+          new-article
+          class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0"
+          href="#"
+          >Write</router-link
+        >
         <a
           class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0"
           href="#"
