@@ -40,6 +40,8 @@ import Pagination from './../components/elements-pagination'
 import UsersList from './../components/sections-blog-users-list'
 import Categories from './../components/sections-categories-list'
 import RecentPost from './../components/sections-recent-article'
+import articlesAPI from './../apis/articles'
+import { Toast } from './../utils/helpers'
 
 export default {
   name: 'Articles',
@@ -53,23 +55,32 @@ export default {
   },
   data() {
     return {
-      posts: [
-        {
-          id: 1,
-          date: 'Jun 1, 2020',
-          tag: 'Laravel',
-          title: 'Build Your New Idea with Laravel Freamwork.',
-          body:
-            'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora expedita dicta totam aspernatur doloremque. Excepturi iste iusto eos enim reprehenderit nisi, accusamus delectus nihil quis facere in modi ratione libero!',
-          image:
-            'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=731&q=80',
-          userName: 'Alex John'
-        }
-      ]
+      posts: []
     }
   },
-  methods: {},
-  created() {}
+  methods: {
+    async fetchArticles() {
+      try {
+        this.isLoading = true
+
+        const { data } = await articlesAPI.getArticles()
+        if (data.success === true) {
+          this.posts = data.articles
+        }
+
+        this.isLoading = false
+      } catch (error) {
+        this.isLoading = false
+        Toast.fire({
+          icon: 'error',
+          title: '無法取得文章，請稍後再試'
+        })
+      }
+    }
+  },
+  created() {
+    this.fetchArticles()
+  }
 }
 </script>
 
