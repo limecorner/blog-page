@@ -12,8 +12,25 @@
                 v-model="form.category"
                 placeholder="please select the category"
               >
-                <el-option label="Zone one" value="shanghai"></el-option>
-                <el-option label="Zone ones" value="shanghais"></el-option>
+                <el-option
+                  v-for="category in categories"
+                  :key="category"
+                  :label="category"
+                  :value="category"
+                ></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item label="Permission">
+              <el-select
+                v-model="form.permission"
+                placeholder="please select the permission"
+              >
+                <el-option
+                  v-for="permission in permissions"
+                  :key="permission"
+                  :label="permission"
+                  :value="permission"
+                ></el-option>
               </el-select>
             </el-form-item>
             <el-form-item label="Content">
@@ -54,6 +71,7 @@
 import UsersList from './../components/sections-blog-users-list'
 import Categories from './../components/sections-categories-list'
 import RecentPost from './../components/sections-recent-article'
+import { permissions, categories } from './../constants'
 // import articlesAPI from './../apis/articles'
 // import { Toast } from './../utils/helpers'
 
@@ -69,8 +87,11 @@ export default {
       form: {
         title: '',
         category: '',
+        permission: '',
         content: ''
-      }
+      },
+      categories,
+      permissions
     }
   },
   methods: {
