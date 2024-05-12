@@ -5,8 +5,10 @@
     >
       <div class="flex justify-between items-center">
         <div>
-          <a class="text-gray-800 text-xl font-bold md:text-2xl" href="#"
-            >Meraki <span class="text-blue-500">UI</span></a
+          <router-link
+            to="/articles"
+            class="text-gray-800 text-xl font-bold md:text-2xl"
+            >Meraki <span class="text-blue-500">UI</span></router-link
           >
         </div>
         <div>
