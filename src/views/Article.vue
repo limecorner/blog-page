@@ -19,7 +19,7 @@
               </div> -->
               <div class="">
                 <h2 class="text-gray-700 font-bold hover:underline">
-                  {{ article.userId }}
+                  {{ article.User.name }}
                 </h2>
                 <span class="font-light text-gray-600">{{
                   article.createdAt
@@ -38,6 +38,38 @@
                 <p class="mt-2 text-gray-600">{{ article.clapCount }}</p>
               </div>
               <div class="flex justify-between items-center mt-4"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        v-for="{ content, id, createdAt, User } in article.Responses"
+        :key="id"
+        class="flex justify-center container mx-auto"
+      >
+        <div class="w-full lg:w-8/12">
+          <div class="mt-6">
+            <div class="max-w-4xl px-10 py-6 bg-white rounded-lg shadow-md">
+              <!-- <div>
+                <a class="flex items-center" href="#">
+                  <img
+                    class="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block"
+                    :src="article.image"
+                    alt="avatar"
+                  />
+                </a>
+              </div> -->
+
+              <div class="">
+                <h2 class="text-gray-700 font-bold hover:underline">
+                  {{ User.name }}
+                </h2>
+                <span class="font-light text-gray-600">{{ createdAt }}</span>
+              </div>
+              <h1 class="text-4xl text-gray-700 font-bold hover:underline">
+                {{ content }}
+              </h1>
             </div>
           </div>
         </div>
