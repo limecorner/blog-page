@@ -175,7 +175,7 @@
 <script>
 import authorizationAPI from './../apis/authorization'
 import { Toast } from './../utils/helpers'
-import LittleSpinner from './../components/little-spinner'
+import LittleSpinner from './../components/little-spinner.vue'
 
 export default {
   components: {

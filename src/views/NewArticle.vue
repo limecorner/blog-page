@@ -75,9 +75,9 @@
 </template>
 
 <script>
-import UsersList from './../components/sections-blog-users-list'
-import Categories from './../components/sections-categories-list'
-import RecentPost from './../components/sections-recent-article'
+import UsersList from './../components/sections-blog-users-list.vue'
+import Categories from './../components/sections-categories-list.vue'
+import RecentPost from './../components/sections-recent-article.vue'
 import { permissions, categories } from './../constants'
 import articlesAPI from './../apis/articles'
 import { Toast } from './../utils/helpers'

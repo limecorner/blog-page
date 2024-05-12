@@ -34,12 +34,12 @@
 </template>
 
 <script>
-import PostFilter from './../components/elements-select-option'
-import Post from './../components/elements-blog-post-article-review'
-import Pagination from './../components/elements-pagination'
-import UsersList from './../components/sections-blog-users-list'
-import Categories from './../components/sections-categories-list'
-import RecentPost from './../components/sections-recent-article'
+import PostFilter from './../components/elements-select-option.vue'
+import Post from './../components/elements-blog-post-article-review.vue'
+import Pagination from './../components/elements-pagination.vue'
+import UsersList from './../components/sections-blog-users-list.vue'
+import Categories from './../components/sections-categories-list.vue'
+import RecentPost from './../components/sections-recent-article.vue'
 import articlesAPI from './../apis/articles'
 import { Toast } from './../utils/helpers'
 
