@@ -90,6 +90,16 @@ export default {
       article: {
         Category: {
           name: ''
+        },
+        Responses: [
+          {
+            User: {
+              name: ''
+            }
+          }
+        ],
+        User: {
+          name: ''
         }
       }
     }
@@ -103,7 +113,6 @@ export default {
       try {
         this.isLoading = true
         const { data } = await articlesAPI.getArticle({ id })
-        console.log({ data })
         this.article = data.article
         this.isLoading = false
       } catch (error) {

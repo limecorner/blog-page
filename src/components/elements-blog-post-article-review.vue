@@ -32,7 +32,7 @@
             alt="avatar"
           /> -->
           <h1 class="text-gray-700 font-bold hover:underline">
-            {{ data.userId }}
+            {{ data.User.name }}
           </h1>
         </a>
       </div>
