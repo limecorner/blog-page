@@ -27,3 +27,9 @@ export const Toast = Swal.mixin({
   showConfirmButton: false,
   timer: 3000
 })
+
+const dayjs = require('dayjs')
+const relativeTime = require('dayjs/plugin/relativeTime')
+dayjs.extend(relativeTime)
+
+export const relativeTimeFromNow = (a) => dayjs(a).fromNow()

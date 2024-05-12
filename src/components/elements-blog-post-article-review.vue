@@ -1,7 +1,9 @@
 <template>
   <div class="max-w-4xl px-10 py-6 bg-white rounded-lg shadow-md">
     <div class="flex justify-between items-center">
-      <span class="font-light text-gray-600">{{ data.createdAt }}</span>
+      <span class="font-light text-gray-600">{{
+        relativeTimeFromNow(data.createdAt)
+      }}</span>
       <a
         class="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500"
         href="#"
@@ -41,7 +43,14 @@
 </template>
 
 <script>
+import { relativeTimeFromNow } from './../utils/helpers'
+
 export default {
+  data() {
+    return {
+      relativeTimeFromNow
+    }
+  },
   props: ['data']
 }
 </script>

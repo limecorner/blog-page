@@ -22,7 +22,7 @@
                   {{ article.User.name }}
                 </h2>
                 <span class="font-light text-gray-600">{{
-                  article.createdAt
+                  relativeTimeFromNow(article.createdAt)
                 }}</span>
                 <!-- <a
                   class="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500"
@@ -65,7 +65,9 @@
                 <h2 class="text-gray-700 font-bold hover:underline">
                   {{ User.name }}
                 </h2>
-                <span class="font-light text-gray-600">{{ createdAt }}</span>
+                <span class="font-light text-gray-600">{{
+                  relativeTimeFromNow(createdAt)
+                }}</span>
               </div>
               <h1 class="text-4xl text-gray-700 font-bold hover:underline">
                 {{ content }}
@@ -80,7 +82,7 @@
 
 <script>
 import articlesAPI from './../apis/articles'
-import { Toast } from './../utils/helpers'
+import { Toast, relativeTimeFromNow } from './../utils/helpers'
 
 export default {
   name: 'Article',
@@ -101,7 +103,8 @@ export default {
         User: {
           name: ''
         }
-      }
+      },
+      relativeTimeFromNow
     }
   },
   created() {
