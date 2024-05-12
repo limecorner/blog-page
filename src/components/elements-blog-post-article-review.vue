@@ -18,7 +18,12 @@
       <p class="mt-2 text-gray-600">{{ data.content }}</p>
     </div>
     <div class="flex justify-between items-center mt-4">
-      <a class="text-blue-500 hover:underline" href="#">Read more</a>
+      <router-link
+        :to="{ name: 'article', params: { id: data.id } }"
+        class="text-blue-500 hover:underline"
+        href="#"
+        >Read more</router-link
+      >
       <div>
         <a class="flex items-center" href="#">
           <!-- <img
