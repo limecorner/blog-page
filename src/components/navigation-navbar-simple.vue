@@ -10,6 +10,11 @@
             class="text-gray-800 text-xl font-bold md:text-2xl"
             >Meraki <span class="text-blue-500">UI</span></router-link
           >
+          <router-link
+            to="/signin"
+            class="text-gray-800 text-xl font-bold md:text-2xl ml-5"
+            >signin
+          </router-link>
         </div>
         <div>
           <button
