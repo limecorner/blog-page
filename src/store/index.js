@@ -13,7 +13,8 @@ export default new Vuex.Store({
       bio: '',
       photo: ''
     },
-    isAuthenticated: false
+    isAuthenticated: false,
+    token: ''
   },
   mutations: {
     setCurrentUser(state, currentUser) {
@@ -44,8 +45,11 @@ export default new Vuex.Store({
           bio,
           photo
         })
+        return true
       } catch (error) {
         console.log(error.message)
+        commit('revokeAuthentication')
+        return false
       }
     }
   }
