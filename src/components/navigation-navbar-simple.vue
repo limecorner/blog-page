@@ -67,6 +67,7 @@
           <button
             type="button"
             class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0"
+            @click="logout"
           >
             登出
           </button>
@@ -82,6 +83,12 @@ export default {
   data() {
     return {
       isOpen: false
+    }
+  },
+  methods: {
+    logout() {
+      this.$store.commit('revokeAuthentication')
+      this.$router.push('/signin')
     }
   },
   computed: {
