@@ -21,18 +21,28 @@
                 <h2 class="text-gray-700 font-bold hover:underline">
                   {{ article.User.name }}
                 </h2>
-                <span class="font-light text-gray-600">{{
-                  relativeTimeFromNow(article.createdAt)
-                }}</span>
+
                 <!-- <a
                   class="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500"
                   href="#"
                   >{{ article.Category.name }}</a
                 > -->
               </div>
+              <div class="flex justify-between items-center">
+                <span class="font-light text-gray-600">{{
+                  relativeTimeFromNow(article.createdAt)
+                }}</span>
+                <a
+                  class="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500"
+                  href="#"
+                  >{{ article.Category.name }}</a
+                >
+              </div>
               <div class="mt-2">
-                <div class="flex justify-between">
-                  <p class="mt-2 text-orange-500">{{ article.permission }}</p>
+                <div class="">
+                  <p class="mt-2 text-orange-500">
+                    觀看權限: {{ article.permission }}
+                  </p>
                 </div>
                 <p class="mt-2 text-gray-600">{{ article.content }}</p>
               </div>
@@ -42,7 +52,10 @@
                   <button
                     class="px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80 mr-5"
                   >
-                    編輯
+                    <router-link
+                      :to="{ name: 'edit-article', params: { id: article.id } }"
+                      >編輯</router-link
+                    >
                   </button>
 
                   <button

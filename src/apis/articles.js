@@ -10,6 +10,9 @@ export default {
   postArticles(data) {
     return apiHelper.post(`/articles`, { ...data })
   },
+  putArticles(id, data) {
+    return apiHelper.put(`/articles/${id}`, { ...data })
+  },
   deletArticle(id) {
     return apiHelper.delete(`/articles/${id}`)
   }
