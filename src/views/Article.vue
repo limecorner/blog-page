@@ -35,9 +35,24 @@
                   <p class="mt-2 text-orange-500">{{ article.permission }}</p>
                 </div>
                 <p class="mt-2 text-gray-600">{{ article.content }}</p>
-                <p class="mt-2 text-gray-600">{{ article.clapCount }}</p>
               </div>
-              <div class="flex justify-between items-center mt-4"></div>
+              <div class="flex justify-between items-center mt-4">
+                <p class="mt-2 text-gray-600">{{ article.clapCount }}</p>
+                <div>
+                  <button
+                    class="px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80 mr-5"
+                  >
+                    編輯
+                  </button>
+
+                  <button
+                    @click.stop.prevent="removeArticle(article.id)"
+                    class="px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-red-600 rounded-lg hover:bg-red-500 focus:outline-none focus:ring focus:ring-red-300 focus:ring-opacity-80"
+                  >
+                    刪除
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -104,7 +119,8 @@ export default {
           name: ''
         }
       },
-      relativeTimeFromNow
+      relativeTimeFromNow,
+      isDeleteProcessing: false
     }
   },
   created() {
@@ -123,6 +139,27 @@ export default {
         Toast.fire({
           icon: 'error',
           title: '無法閱讀此文章，請稍後再試'
+        })
+      }
+    },
+    async removeArticle(id) {
+      try {
+        this.isDeleteProcessing = true
+        const { data } = await articlesAPI.deletArticle(id)
+
+        if (data.success === true) {
+          Toast.fire({
+            icon: 'success',
+            title: '刪除文章成功'
+          })
+          setTimeout(() => this.$router.push('/articles'), 1000)
+        }
+      } catch (error) {
+        this.isDeleteProcessing = false
+        const errorMessage = error.response.data.message
+        Toast.fire({
+          icon: 'error',
+          title: errorMessage ? errorMessage : '無法刪除文章，請稍後再試'
         })
       }
     }
