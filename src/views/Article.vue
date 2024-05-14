@@ -48,7 +48,7 @@
               </div>
               <div class="flex justify-between items-center mt-4">
                 <p class="mt-2 text-gray-600">{{ article.clapCount }}</p>
-                <div>
+                <div v-if="currentUser.id === article.User.id">
                   <button
                     class="px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80 mr-5"
                   >
@@ -111,6 +111,7 @@
 <script>
 import articlesAPI from './../apis/articles'
 import { Toast, relativeTimeFromNow } from './../utils/helpers'
+import { mapState } from 'vuex'
 
 export default {
   name: 'Article',
@@ -176,6 +177,9 @@ export default {
         })
       }
     }
+  },
+  computed: {
+    ...mapState(['currentUser', 'isAuthenticated'])
   }
 }
 </script>
