@@ -7,12 +7,14 @@
             <h1 class="text-xl font-bold text-gray-700 md:text-2xl">Post</h1>
             <post-filter></post-filter>
           </div>
-          <div class="mt-6" v-for="post in posts" :key="post.id">
-            <post :data="post"></post>
+          <div class="post-container">
+            <div class="mt-6" v-for="post in posts" :key="post.id">
+              <post :data="post"></post>
+            </div>
           </div>
-          <div class="mt-8">
+          <!-- <div class="mt-8">
             <Pagination></Pagination>
-          </div>
+          </div> -->
         </div>
         <div class="-mx-8 w-4/12 hidden lg:block">
           <div class="px-8">
@@ -36,7 +38,7 @@
 <script>
 import PostFilter from './../components/elements-select-option.vue'
 import Post from './../components/elements-blog-post-article-review.vue'
-import Pagination from './../components/elements-pagination.vue'
+// import Pagination from './../components/elements-pagination.vue'
 import UsersList from './../components/sections-blog-users-list.vue'
 import Categories from './../components/sections-categories-list.vue'
 import RecentPost from './../components/sections-recent-article.vue'
@@ -48,7 +50,7 @@ export default {
   components: {
     PostFilter,
     Post,
-    Pagination,
+    // Pagination,
     UsersList,
     Categories,
     RecentPost
@@ -84,7 +86,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 @import '../assets/css/app.css';
 
 ::-webkit-scrollbar {
@@ -101,5 +103,9 @@ export default {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #2d3748;
+}
+.post-container {
+  height: 800px;
+  overflow: scroll;
 }
 </style>

@@ -17,7 +17,7 @@
         }}</a>
         <p class="mt-2 text-orange-500">{{ data.permission }}</p>
       </div>
-      <p class="mt-2 text-gray-600">{{ data.content }}</p>
+      <p class="mt-2 text-gray-600 truncate">{{ data.content }}</p>
     </div>
     <div class="flex justify-between items-center mt-4">
       <router-link

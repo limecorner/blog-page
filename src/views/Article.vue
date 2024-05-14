@@ -44,7 +44,7 @@
                     觀看權限: {{ article.permission }}
                   </p>
                 </div>
-                <p class="mt-2 text-gray-600">{{ article.content }}</p>
+                <p class="mt-2 text-gray-600 truncate">{{ article.content }}</p>
               </div>
               <div class="flex justify-between items-center mt-4">
                 <p class="mt-2 text-gray-600">{{ article.clapCount }}</p>
