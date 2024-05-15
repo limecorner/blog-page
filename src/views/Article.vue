@@ -102,7 +102,7 @@
                   v-else
                   type="primary"
                   class="w-24 mt-3"
-                  @click="handleSubmit()"
+                  @click="handleSubmit(article.id)"
                   >送出回覆</el-button
                 >
                 <!-- <el-button>Cancel</el-button> -->
@@ -154,6 +154,7 @@
 
 <script>
 import articlesAPI from './../apis/articles'
+import responsesAPI from './../apis/responses'
 import { Toast, relativeTimeFromNow } from './../utils/helpers'
 import { mapState } from 'vuex'
 import Swal from 'sweetalert2'
@@ -246,6 +247,33 @@ export default {
           }
         }
       })
+    },
+    async handleSubmit(articleId) {
+      try {
+        this.isProcessing = true
+        const { content } = this.form
+        const { data } = await responsesAPI.postResponse(articleId, {
+          content
+        })
+        if (data.success === true) {
+          const addedResponse = {
+            ...data.response,
+            User: {
+              name: this.currentUser.name
+            }
+          }
+          this.article.Responses.unshift(addedResponse)
+          // this.$router.go()
+        }
+        this.isProcessing = false
+      } catch (error) {
+        this.isProcessing = false
+        const errorMessage = error.response.data.message
+        Toast.fire({
+          icon: 'error',
+          title: errorMessage ? errorMessage : '無法回覆文章'
+        })
+      }
     }
   },
   computed: {
