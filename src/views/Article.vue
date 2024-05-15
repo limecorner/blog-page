@@ -48,31 +48,72 @@
               </div>
               <div class="flex justify-between items-center mt-4">
                 <p class="mt-2 text-gray-600">{{ article.clapCount }}</p>
-                <div v-if="currentUser.id === article.User.id">
-                  <button
-                    class="px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80 mr-5"
-                  >
-                    <router-link
-                      :to="{ name: 'edit-article', params: { id: article.id } }"
-                      >編輯</router-link
-                    >
-                  </button>
 
+                <div>
                   <button
-                    @click.stop.prevent="
-                      removeArticle(article.id, article.title)
-                    "
-                    class="px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-red-600 rounded-lg hover:bg-red-500 focus:outline-none focus:ring focus:ring-red-300 focus:ring-opacity-80"
+                    @click="isShowResponse = !isShowResponse"
+                    class="px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-yellow-600 rounded-lg hover:bg-yellow-500 focus:outline-none focus:ring focus:ring-yellow-300 focus:ring-opacity-80 mr-5"
                   >
-                    刪除
+                    回覆
                   </button>
+                  <template v-if="currentUser.id === article.User.id">
+                    <button
+                      class="px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80 mr-5"
+                    >
+                      <router-link
+                        :to="{
+                          name: 'edit-article',
+                          params: { id: article.id }
+                        }"
+                        >編輯</router-link
+                      >
+                    </button>
+
+                    <button
+                      @click.stop.prevent="
+                        removeArticle(article.id, article.title)
+                      "
+                      class="px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-red-600 rounded-lg hover:bg-red-500 focus:outline-none focus:ring focus:ring-red-300 focus:ring-opacity-80"
+                    >
+                      刪除
+                    </button>
+                  </template>
                 </div>
               </div>
             </div>
+
+            <!-- 回覆表格 start -->
+            <div
+              v-show="isShowResponse"
+              class="max-w-4xl px-10 py-6 bg-white rounded-lg shadow-md mt-5"
+            >
+              <el-form ref="form" :model="form" label-width="120px">
+                <p>{{ currentUser.name }}</p>
+                <el-input
+                  type="textarea"
+                  :autosize="{ minRows: 2 }"
+                  v-model="form.content"
+                  class="mt-4"
+                ></el-input>
+                <el-button v-if="isProcessing" type="primary" class="w-24">
+                  <span class="spinner small-spinner"></span>
+                </el-button>
+                <el-button
+                  v-else
+                  type="primary"
+                  class="w-24 mt-3"
+                  @click="handleSubmit()"
+                  >送出回覆</el-button
+                >
+                <!-- <el-button>Cancel</el-button> -->
+              </el-form>
+            </div>
+            <!-- 回覆表格 end-->
           </div>
         </div>
       </div>
 
+      <!-- 所有回覆 start -->
       <div
         v-for="{ content, id, createdAt, User } in article.Responses"
         :key="id"
@@ -106,6 +147,7 @@
           </div>
         </div>
       </div>
+      <!-- 所有回覆 end -->
     </div>
   </div>
 </template>
@@ -137,7 +179,12 @@ export default {
         }
       },
       relativeTimeFromNow,
-      isDeleteProcessing: false
+      isDeleteProcessing: false,
+      isShowResponse: false,
+      form: {
+        content: ''
+      },
+      isProcessing: false
     }
   },
   created() {
@@ -207,4 +254,9 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+.small-spinner {
+  width: 1rem;
+  height: 1rem;
+}
+</style>
