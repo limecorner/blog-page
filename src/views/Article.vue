@@ -174,8 +174,8 @@ export default {
         },
         cancelButtonText: '取消',
         reverseButtons: true,
-        allowOutsideClick: false
-        // heightAuto: false
+        allowOutsideClick: false,
+        heightAuto: false
       }).then(async (result) => {
         if (result.isConfirmed) {
           try {
