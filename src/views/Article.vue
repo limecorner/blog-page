@@ -59,7 +59,9 @@
                   </button>
 
                   <button
-                    @click.stop.prevent="removeArticle(article.id)"
+                    @click.stop.prevent="
+                      removeArticle(article.id, article.title)
+                    "
                     class="px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-red-600 rounded-lg hover:bg-red-500 focus:outline-none focus:ring focus:ring-red-300 focus:ring-opacity-80"
                   >
                     刪除
@@ -112,6 +114,7 @@
 import articlesAPI from './../apis/articles'
 import { Toast, relativeTimeFromNow } from './../utils/helpers'
 import { mapState } from 'vuex'
+import Swal from 'sweetalert2'
 
 export default {
   name: 'Article',
@@ -156,26 +159,46 @@ export default {
         })
       }
     },
-    async removeArticle(id) {
-      try {
-        this.isDeleteProcessing = true
-        const { data } = await articlesAPI.deletArticle(id)
+    async removeArticle(id, title) {
+      Swal.fire({
+        text: `確定要刪除 ${title} 這篇文章嗎?`,
+        icon: 'warning',
+        buttonsStyling: false,
+        showCancelButton: true,
+        confirmButtonText: '確定',
+        customClass: {
+          confirmButton:
+            'px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-red-600 rounded-lg hover:bg-red-500 focus:outline-none focus:ring focus:ring-red-300 focus:ring-opacity-80',
+          cancelButton:
+            'px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-green-600 rounded-lg hover:bg-green-500 focus:outline-none focus:ring focus:ring-green-300 focus:ring-opacity-80 mr-5'
+        },
+        cancelButtonText: '取消',
+        reverseButtons: true,
+        allowOutsideClick: false
+        // heightAuto: false
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          try {
+            this.isDeleteProcessing = true
+            const { data } = await articlesAPI.deletArticle(id)
 
-        if (data.success === true) {
-          Toast.fire({
-            icon: 'success',
-            title: '刪除文章成功'
-          })
-          setTimeout(() => this.$router.push('/articles'), 1000)
+            if (data.success === true) {
+              Toast.fire({
+                icon: 'success',
+                title: '刪除文章成功'
+              })
+              setTimeout(() => this.$router.push('/articles'), 1000)
+            }
+          } catch (error) {
+            this.isDeleteProcessing = false
+            const errorMessage = error.response.data.message
+            Toast.fire({
+              icon: 'error',
+              title: errorMessage ? errorMessage : '無法刪除文章，請稍後再試'
+            })
+          }
         }
-      } catch (error) {
-        this.isDeleteProcessing = false
-        const errorMessage = error.response.data.message
-        Toast.fire({
-          icon: 'error',
-          title: errorMessage ? errorMessage : '無法刪除文章，請稍後再試'
-        })
-      }
+      })
     }
   },
   computed: {
