@@ -144,6 +144,16 @@
                 {{ content }}
               </h1>
               <button
+                @click="
+                  dialogVisible = true
+                  editResponseId = id
+                  reviseForm.content = content
+                "
+                class="px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80 mr-5"
+              >
+                編輯
+              </button>
+              <button
                 @click.stop.prevent="removeReponse(id, content)"
                 class="px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-red-600 rounded-lg hover:bg-red-500 focus:outline-none focus:ring focus:ring-red-300 focus:ring-opacity-80"
               >
@@ -154,6 +164,25 @@
         </div>
       </div>
       <!-- 所有回覆 end -->
+      <el-dialog
+        title="回覆"
+        :visible.sync="dialogVisible"
+        :close-on-click-modal="false"
+        width="30%"
+      >
+        <span>修改內容為</span>
+        <el-input
+          type="textarea"
+          :autosize="{ minRows: 2 }"
+          v-model="reviseForm.content"
+          class="mt-2"
+        ></el-input>
+
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="dialogVisible = false">取消</el-button>
+          <el-button @click="editResponse()" type="primary">送出</el-button>
+        </span>
+      </el-dialog>
     </div>
   </div>
 </template>
@@ -191,7 +220,13 @@ export default {
       form: {
         content: ''
       },
-      isProcessing: false
+      isProcessing: false,
+      dialogVisible: false,
+      editResponseId: 0,
+      editResponseContent: '',
+      reviseForm: {
+        content: ''
+      }
     }
   },
   created() {
@@ -278,6 +313,32 @@ export default {
         Toast.fire({
           icon: 'error',
           title: errorMessage ? errorMessage : '無法回覆文章'
+        })
+      }
+    },
+    async editResponse() {
+      try {
+        const { content } = this.reviseForm
+        const { data } = await responsesAPI.putResponse(this.editResponseId, {
+          content
+        })
+
+        if (data.success === true) {
+          const editResponseIndex = this.article.Responses.findIndex(
+            (r) => r.id === this.editResponseId
+          )
+          this.article.Responses[editResponseIndex].content = content
+          Toast.fire({
+            icon: 'success',
+            title: '編輯回覆成功'
+          })
+        }
+        this.dialogVisible = false
+      } catch (error) {
+        const errorMessage = error.response.data.message
+        Toast.fire({
+          icon: 'error',
+          title: errorMessage ? errorMessage : '無法編輯回覆'
         })
       }
     },
