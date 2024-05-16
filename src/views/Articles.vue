@@ -89,21 +89,6 @@ export default {
 <style scoped>
 @import '../assets/css/app.css';
 
-::-webkit-scrollbar {
-  width: 5px;
-}
-
-::-webkit-scrollbar-track {
-  background: #2d3748;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #cbd5e0;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #2d3748;
-}
 .post-container {
   height: 800px;
   overflow: auto;
