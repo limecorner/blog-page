@@ -106,6 +106,6 @@ export default {
 }
 .post-container {
   height: 800px;
-  overflow: scroll;
+  overflow: auto;
 }
 </style>
