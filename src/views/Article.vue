@@ -140,9 +140,15 @@
                   relativeTimeFromNow(createdAt)
                 }}</span>
               </div>
-              <h1 class="text-4xl text-gray-700 font-bold hover:underline">
+              <h1 class="text-2xl text-gray-700 hover:underline">
                 {{ content }}
               </h1>
+              <button
+                @click.stop.prevent="removeReponse(id, content)"
+                class="px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-red-600 rounded-lg hover:bg-red-500 focus:outline-none focus:ring focus:ring-red-300 focus:ring-opacity-80"
+              >
+                刪除
+              </button>
             </div>
           </div>
         </div>
@@ -274,6 +280,47 @@ export default {
           title: errorMessage ? errorMessage : '無法回覆文章'
         })
       }
+    },
+    async removeReponse(id, content) {
+      Swal.fire({
+        text: `確定要刪除 ${content} 這篇回復嗎?`,
+        icon: 'warning',
+        buttonsStyling: false,
+        showCancelButton: true,
+        confirmButtonText: '確定',
+        customClass: {
+          confirmButton:
+            'px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-red-600 rounded-lg hover:bg-red-500 focus:outline-none focus:ring focus:ring-red-300 focus:ring-opacity-80',
+          cancelButton:
+            'px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-green-600 rounded-lg hover:bg-green-500 focus:outline-none focus:ring focus:ring-green-300 focus:ring-opacity-80 mr-5'
+        },
+        cancelButtonText: '取消',
+        reverseButtons: true,
+        allowOutsideClick: false,
+        heightAuto: false
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          try {
+            const { data } = await responsesAPI.deleteResponse(id)
+
+            if (data.success === true) {
+              Toast.fire({
+                icon: 'success',
+                title: '刪除回覆成功'
+              })
+              this.article.Responses = this.article.Responses.filter(
+                (r) => r.id !== id
+              )
+            }
+          } catch (error) {
+            const errorMessage = error.response.data.message
+            Toast.fire({
+              icon: 'error',
+              title: errorMessage ? errorMessage : '無法刪除回覆，請稍後再試'
+            })
+          }
+        }
+      })
     }
   },
   computed: {
