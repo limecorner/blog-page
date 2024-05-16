@@ -85,10 +85,10 @@
             <!-- 回覆表格 start -->
             <div
               v-show="isShowResponse"
-              class="max-w-4xl px-10 py-6 bg-white rounded-lg shadow-md mt-5"
+              class="max-w-4xl px-10 py-6 rounded-lg shadow-md mt-5"
             >
               <el-form ref="form" :model="form" label-width="120px">
-                <p>{{ currentUser.name }}</p>
+                <p>{{ currentUser.name }} 想回覆</p>
                 <el-input
                   type="textarea"
                   :autosize="{ minRows: 2 }"
@@ -114,6 +114,15 @@
       </div>
 
       <!-- 所有回覆 start -->
+      <div class="flex justify-center container mx-auto">
+        <div class="w-full lg:w-8/12">
+          <div class="mt-6">
+            <div class="max-w-4xl px-10 py-6 bg-white rounded-lg shadow-md">
+              <h3 class="text-xl text-gray-700">回覆</h3>
+            </div>
+          </div>
+        </div>
+      </div>
       <div
         v-for="{ content, id, createdAt, User } in article.Responses"
         :key="id"
