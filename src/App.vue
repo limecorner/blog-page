@@ -28,12 +28,12 @@ export default {
   width: 5px;
 }
 
-::-webkit-scrollbar-track {
+/* ::-webkit-scrollbar-track {
   background: #2d3748;
-}
+} */
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e0;
+  background: darkgrey;
 }
 
 ::-webkit-scrollbar-thumb:hover {
