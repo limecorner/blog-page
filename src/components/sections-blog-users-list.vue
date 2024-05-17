@@ -3,17 +3,21 @@
     class="flex flex-col bg-white max-w-sm px-6 py-4 mx-auto rounded-lg shadow-md"
   >
     <ul class="-mx-4">
-      <li class="flex items-center mt-6">
-        <img
+      <li class="flex items-center">
+        <!-- <img
           class="w-10 h-10 object-cover rounded-full mx-4"
           src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=731&q=80"
           alt="avatar"
-        />
+        /> -->
         <p>
-          <a class="text-gray-700 font-bold mx-1 hover:underline" href="#"
-            >Alex John</a
+          <a class="text-gray-700 font-bold mx-1 hover:underline" href="#">{{
+            data.name
+          }}</a>
+          <button
+            class="ml-3 px-2 py-1 font-medium tracking-wide text-green-500 capitalize transition-colors duration-300 transform  border border-green-500 rounded-lg hover:border-green-700 hover:text-green-700"
           >
-          <span class="text-gray-700 text-sm font-light">Created 23 Posts</span>
+            Following
+          </button>
         </p>
       </li>
     </ul>

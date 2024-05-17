@@ -25,7 +25,10 @@
           </div>
           <div class="mt-10 px-8">
             <h1 class="mb-4 text-xl font-bold text-gray-700">Following</h1>
-            <users-list></users-list>
+            <!-- <users-list ></users-list> -->
+            <div class="mt-6" v-for="idol in currentUser.Idols" :key="idol.id">
+              <users-list :data="idol"></users-list>
+            </div>
           </div>
         </div>
       </div>

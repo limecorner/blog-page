@@ -36,14 +36,17 @@ export default new Vuex.Store({
     async fetchCurrentUser({ commit }) {
       try {
         const { data } = await usersAPI.getCurrentUser()
-        const { id, name, email, bio, photo } = data.user
+        console.log({ data })
+        const { id, name, email, bio, photo, Idols, Fans } = data.user
 
         commit('setCurrentUser', {
           id,
           name,
           email,
           bio,
-          photo
+          photo,
+          Idols,
+          Fans
         })
         return true
       } catch (error) {
