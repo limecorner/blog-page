@@ -36,6 +36,21 @@
           <h1 class="text-gray-700 font-bold hover:underline">
             {{ data.User.name }}
           </h1>
+          <template v-if="currentUser.id !== data.User.id">
+            <button
+              v-if="isIdol(data.User.id)"
+              class="ml-3 px-2 py-1 font-medium tracking-wide text-green-500 capitalize transition-colors duration-300 transform border border-green-500 rounded-lg hover:border-green-700 hover:text-green-700"
+            >
+              Following
+            </button>
+            <button
+              v-else
+              @click.stop.prevent="addIdol(data.User)"
+              class="ml-3 px-2 py-1 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-green-600 rounded-lg hover:bg-green-400"
+            >
+              Follow
+            </button>
+          </template>
         </a>
       </div>
     </div>
@@ -43,7 +58,10 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import { relativeTimeFromNow } from './../utils/helpers'
+import followshipsAPI from './../apis/followships'
+import { Toast } from './../utils/helpers'
 
 export default {
   data() {
@@ -51,6 +69,36 @@ export default {
       relativeTimeFromNow
     }
   },
+  methods: {
+    async addIdol({ id, name }) {
+      try {
+        const { data } = await followshipsAPI.postIdol(id)
+        if (data.success === true) {
+          this.currentUser.Idols.push({ id, name })
+          Toast.fire({
+            icon: 'success',
+            title: '成功追蹤此偶像'
+          })
+        }
+      } catch (error) {
+        const errorMessage = error.response.data.message
+        Toast.fire({
+          icon: 'error',
+          title: errorMessage ? errorMessage : '無法追蹤此偶像，請稍後再試'
+        })
+      }
+    },
+    isIdol(idolId) {
+      const index = this.currentUser.Idols.findIndex(
+        (idol) => idol.id === idolId
+      )
+      return index !== -1
+    }
+  },
+  computed: {
+    ...mapState(['currentUser'])
+  },
+
   props: ['data']
 }
 </script>
