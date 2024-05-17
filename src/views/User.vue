@@ -20,7 +20,7 @@
             <h1 class="mb-4 text-xl font-bold text-gray-700">
               {{ currentUser.name }}
             </h1>
-            <p>{{ currentUser.bio }} Followers</p>
+            <p>{{ currentUser.Fans.length }} Followers</p>
             <p>{{ currentUser.bio }}</p>
           </div>
           <div class="mt-10 px-8">
