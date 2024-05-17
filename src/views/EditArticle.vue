@@ -55,40 +55,19 @@
             </el-form-item>
           </el-form>
         </div>
-        <div class="-mx-8 w-4/12 hidden lg:block">
-          <div class="px-8">
-            <h1 class="mb-4 text-xl font-bold text-gray-700">Authors</h1>
-            <users-list></users-list>
-          </div>
-          <div class="mt-10 px-8">
-            <h1 class="mb-4 text-xl font-bold text-gray-700">Categories</h1>
-            <categories></categories>
-          </div>
-          <div class="mt-10 px-8">
-            <h1 class="mb-4 text-xl font-bold text-gray-700">Recent Post</h1>
-            <recent-post></recent-post>
-          </div>
-        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import UsersList from './../components/sections-blog-users-list.vue'
-import Categories from './../components/sections-categories-list.vue'
-import RecentPost from './../components/sections-recent-article.vue'
 import { permissions, categories } from './../constants'
 import articlesAPI from './../apis/articles'
 import { Toast } from './../utils/helpers'
 
 export default {
   name: 'Articles',
-  components: {
-    UsersList,
-    Categories,
-    RecentPost
-  },
+
   data() {
     return {
       form: {
