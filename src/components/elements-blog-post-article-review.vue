@@ -39,6 +39,7 @@
           <template v-if="currentUser.id !== data.User.id">
             <button
               v-if="isIdol(data.User.id)"
+              @click.stop.prevent="removeIdol(data.User.id)"
               class="ml-3 px-2 py-1 font-medium tracking-wide text-green-500 capitalize transition-colors duration-300 transform border border-green-500 rounded-lg hover:border-green-700 hover:text-green-700"
             >
               Following
@@ -85,6 +86,26 @@ export default {
         Toast.fire({
           icon: 'error',
           title: errorMessage ? errorMessage : '無法追蹤此偶像，請稍後再試'
+        })
+      }
+    },
+    async removeIdol(id) {
+      try {
+        const { data } = await followshipsAPI.deleteIdol(id)
+        if (data.success === true) {
+          this.currentUser.Idols = this.currentUser.Idols.filter(
+            (idol) => idol.id !== id
+          )
+          Toast.fire({
+            icon: 'success',
+            title: '成功取消追蹤此偶像'
+          })
+        }
+      } catch (error) {
+        const errorMessage = error.response.data.message
+        Toast.fire({
+          icon: 'error',
+          title: errorMessage ? errorMessage : '無法取消追蹤此偶像，請稍後再試'
         })
       }
     },
