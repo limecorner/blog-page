@@ -59,11 +59,11 @@ export default {
     }
   },
   methods: {
-    async fetchArticles() {
+    async fetchArticles(userId) {
       try {
         this.isLoading = true
-
-        const { data } = await articlesAPI.getArticles()
+        const queryString = `?userId=${userId}`
+        const { data } = await articlesAPI.getArticles(queryString)
         if (data.success === true) {
           this.posts = data.articles
         }
@@ -79,7 +79,8 @@ export default {
     }
   },
   created() {
-    this.fetchArticles()
+    const { id: userId } = this.$route.params
+    this.fetchArticles(userId)
   },
   computed: {
     ...mapState(['currentUser', 'isAuthenticated'])
