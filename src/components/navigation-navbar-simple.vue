@@ -41,7 +41,7 @@
           href="#"
           >Write</router-link
         >
-        <a
+        <!-- <a
           class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0"
           href="#"
           >Home</a
@@ -55,22 +55,26 @@
           class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0"
           href="#"
           >About us</a
-        >
+        > -->
         <!-- is user login -->
         <template v-if="isAuthenticated">
-          <router-link
-            :to="{ name: 'user', params: { id: currentUser.id } }"
-            class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0"
-          >
-            Hi, {{ currentUser.name || '使用者' }}
-          </router-link>
-          <button
-            type="button"
-            class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0"
-            @click="logout"
-          >
-            登出
-          </button>
+          <span>
+            <router-link
+              :to="{ name: 'user', params: { id: currentUser.id } }"
+              class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0"
+            >
+              Hi, {{ currentUser.name || '使用者' }}
+            </router-link>
+          </span>
+          <span>
+            <button
+              type="button"
+              class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0"
+              @click="logout"
+            >
+              登出
+            </button>
+          </span>
         </template>
       </div>
     </div>
