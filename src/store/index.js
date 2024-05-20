@@ -11,7 +11,8 @@ export default new Vuex.Store({
       name: '',
       email: '',
       bio: '',
-      photo: ''
+      photo: '',
+      permission: ''
     },
     isAuthenticated: false,
     token: ''
@@ -37,7 +38,16 @@ export default new Vuex.Store({
       try {
         const { data } = await usersAPI.getCurrentUser()
         console.log({ data })
-        const { id, name, email, bio, photo, Idols, Fans } = data.user
+        const {
+          id,
+          name,
+          email,
+          bio,
+          permission,
+          photo,
+          Idols,
+          Fans
+        } = data.user
 
         commit('setCurrentUser', {
           id,
@@ -45,6 +55,7 @@ export default new Vuex.Store({
           email,
           bio,
           photo,
+          permission,
           Idols,
           Fans
         })

@@ -66,6 +66,7 @@
               Hi, {{ currentUser.name || '使用者' }}
             </router-link>
           </span>
+          <span class="text-orange-500">{{ currentUser.permission }}</span>
           <span>
             <button
               type="button"
