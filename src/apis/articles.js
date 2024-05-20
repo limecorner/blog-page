@@ -2,7 +2,7 @@ import { apiHelper } from '../utils/helpers'
 
 export default {
   getArticles(queryString) {
-    console.log('queryString', queryString)
+    // console.log('queryString', queryString)
     const path = queryString ? `/articles${queryString}` : '/articles'
     return apiHelper.get(path)
     // return apiHelper.get(`/articles?userId=36&categoryId=6`)

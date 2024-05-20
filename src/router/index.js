@@ -44,6 +44,11 @@ const routes = [
     component: () => import('../views/EditArticle.vue')
   },
   {
+    path: '/categories/:id',
+    name: 'categories',
+    component: () => import('../views/Categories.vue')
+  },
+  {
     path: '/users/:id',
     name: 'user',
     component: () => import('../views/User.vue')

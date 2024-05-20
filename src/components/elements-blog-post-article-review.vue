@@ -4,11 +4,12 @@
       <span class="font-light text-gray-600">{{
         relativeTimeFromNow(data.createdAt)
       }}</span>
-      <a
+      <router-link
+        :to="{ name: 'categories', params: { id: data.Category.id } }"
         class="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500"
-        href="#"
-        >{{ data.Category.name }}</a
       >
+        {{ data.Category.name }}
+      </router-link>
     </div>
     <div class="mt-2">
       <div class="flex justify-between">

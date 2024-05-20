@@ -32,10 +32,13 @@
                 <span class="font-light text-gray-600">{{
                   relativeTimeFromNow(article.createdAt)
                 }}</span>
-                <a
+                <router-link
+                  :to="{
+                    name: 'categories',
+                    params: { id: article.Category.id }
+                  }"
                   class="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500"
-                  href="#"
-                  >{{ article.Category.name }}</a
+                  >{{ article.Category.name }}</router-link
                 >
               </div>
               <div class="mt-2">
