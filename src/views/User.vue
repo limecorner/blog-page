@@ -1,5 +1,5 @@
 <template>
-  <div class="font-roboto bg-gray-100">
+  <div class="font-roboto bg-gray-100 overflow-auto" style="height: 85%;">
     <div class="px-6 py-8">
       <div class="flex justify-between container mx-auto">
         <div class="w-full lg:w-8/12">
