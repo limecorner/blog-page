@@ -317,10 +317,12 @@ export default {
           const addedResponse = {
             ...data.response,
             User: {
-              name: this.currentUser.name
+              name: this.currentUser.name,
+              id: this.currentUser.id
             }
           }
           this.article.Responses.unshift(addedResponse)
+          this.form.content = ''
           // this.$router.go()
         }
         this.isProcessing = false
