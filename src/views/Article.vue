@@ -5,7 +5,7 @@
         <div class="w-full lg:w-8/12">
           <div class="mt-6">
             <div class="max-w-4xl px-10 py-6 bg-white rounded-lg shadow-md">
-              <h1 class="text-4xl text-gray-700 font-bold hover:underline">
+              <h1 class="text-4xl text-gray-700 font-bold">
                 {{ article.title }}
               </h1>
               <!-- <div>
@@ -152,7 +152,7 @@
                   relativeTimeFromNow(createdAt)
                 }}</span>
               </div>
-              <h1 class="text-2xl text-gray-700 hover:underline">
+              <h1 class="text-2xl text-gray-700">
                 {{ content }}
               </h1>
               <div

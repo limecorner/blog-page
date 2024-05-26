@@ -13,9 +13,7 @@
     </div>
     <div class="mt-2">
       <div class="flex justify-between">
-        <a class="text-2xl text-gray-700 font-bold hover:underline" href="#">{{
-          data.title
-        }}</a>
+        <a class="text-2xl text-gray-700 font-bold">{{ data.title }}</a>
         <p class="mt-2 text-orange-500">{{ data.permission }}</p>
       </div>
       <p class="mt-2 text-gray-600 truncate">{{ data.content }}</p>
