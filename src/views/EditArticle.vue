@@ -61,8 +61,9 @@
 </template>
 
 <script>
-import { permissions, categories } from './../constants'
+import { permissions } from './../constants'
 import articlesAPI from './../apis/articles'
+import categoriesAPI from './../apis/categories'
 import { Toast } from './../utils/helpers'
 
 export default {
@@ -77,13 +78,14 @@ export default {
         content: ''
       },
       isProcessing: false,
-      categories,
+      categories: [],
       permissions
     }
   },
   created() {
     const { id } = this.$route.params
     this.fetchArticle(id)
+    this.fetchCategories()
   },
   methods: {
     async fetchArticle(id) {
@@ -95,6 +97,20 @@ export default {
         Toast.fire({
           icon: 'error',
           title: '無法閱讀此文章，請稍後再試'
+        })
+      }
+    },
+    async fetchCategories() {
+      try {
+        const { data } = await categoriesAPI.getCategories()
+        if (data.success === true) {
+          this.categories = [...data.categories]
+        }
+      } catch (error) {
+        this.categories = []
+        Toast.fire({
+          icon: 'error',
+          title: '無法取得分類，請稍後再試'
         })
       }
     },
