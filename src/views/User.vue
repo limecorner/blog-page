@@ -7,7 +7,7 @@
             <h1 class="text-xl font-bold text-gray-700 md:text-2xl">
               {{ currentUser.name }}
             </h1>
-            <post-filter></post-filter>
+            <!-- <post-filter></post-filter> -->
           </div>
           <div class="post-container">
             <div class="mt-6" v-for="post in posts" :key="post.id">
@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import PostFilter from './../components/elements-select-option.vue'
+// import PostFilter from './../components/elements-select-option.vue'
 import Post from './../components/elements-blog-post-article-review.vue'
 import UsersList from './../components/sections-blog-users-list.vue'
 
@@ -49,7 +49,7 @@ import { mapState } from 'vuex'
 export default {
   name: 'User',
   components: {
-    PostFilter,
+    // PostFilter,
     Post,
     UsersList
   },

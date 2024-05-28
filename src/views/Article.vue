@@ -50,7 +50,8 @@
                 <p class="mt-2 text-gray-600 truncate">{{ article.content }}</p>
               </div>
               <div class="flex justify-between items-center mt-4">
-                <p class="mt-2 text-gray-600">{{ article.clapCount }}</p>
+                <p class="mt-2 text-gray-600"></p>
+                <!-- {{ article.clapCount }} -->
 
                 <div>
                   <button
