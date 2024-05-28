@@ -86,12 +86,21 @@ export default {
     async handleSubmit() {
       try {
         this.isProcessing = true
+        const { categoryId, title, permission, content } = this.form
+        if (!categoryId || !title.trim() || !permission || !content.trim()) {
+          this.isProcessing = false
+          Toast.fire({
+            icon: 'error',
+            title: '標題、文章類別、觀看權限、內容皆為必填欄位'
+          })
+          return
+        }
 
         const { data } = await articlesAPI.postArticles({
-          categoryId: this.form.categoryId,
-          title: this.form.title,
-          permission: this.form.permission,
-          content: this.form.content
+          categoryId,
+          title,
+          permission,
+          content
         })
 
         if (data.success === true) {

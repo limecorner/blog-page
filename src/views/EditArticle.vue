@@ -120,6 +120,15 @@ export default {
 
         const { id } = this.$route.params
         const { categoryId, title, permission, content } = this.form
+        if (!categoryId || !title.trim() || !permission || !content.trim()) {
+          this.isProcessing = false
+          Toast.fire({
+            icon: 'error',
+            title: '標題、文章類別、觀看權限、內容皆為必填欄位'
+          })
+          return
+        }
+
         const { data } = await articlesAPI.putArticles(id, {
           categoryId,
           title,
