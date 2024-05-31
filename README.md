@@ -1,6 +1,4 @@
 # iBlog
-
-## 介紹
 iBlog 是一個簡單版的 blog，前端框架使用 Vue，搭配 Tailwind CSS、Meraki UI、Element UI，對應的後端 [repo](https://github.com/limecorner/blog-backend)。
 
 ## 功能
