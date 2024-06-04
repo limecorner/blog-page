@@ -4,14 +4,11 @@
       <div class="flex justify-between container mx-auto">
         <div class="w-full lg:w-8/12">
           <el-form ref="form" :model="form" label-width="120px">
-            <el-form-item label="Title">
+            <el-form-item label="標題">
               <el-input v-model="form.title"></el-input>
             </el-form-item>
-            <el-form-item label="Category">
-              <el-select
-                v-model="form.categoryId"
-                placeholder="please select the category"
-              >
+            <el-form-item label="分類">
+              <el-select v-model="form.categoryId" placeholder="請選擇分類">
                 <el-option
                   v-for="{ name, id } in categories"
                   :key="name"
@@ -20,11 +17,8 @@
                 ></el-option>
               </el-select>
             </el-form-item>
-            <el-form-item label="Permission">
-              <el-select
-                v-model="form.permission"
-                placeholder="please select the permission"
-              >
+            <el-form-item label="權限">
+              <el-select v-model="form.permission" placeholder="請選擇權限">
                 <el-option
                   v-for="permission in permissions"
                   :key="permission"
@@ -33,7 +27,7 @@
                 ></el-option>
               </el-select>
             </el-form-item>
-            <el-form-item label="Content">
+            <el-form-item label="內容">
               <el-input
                 type="textarea"
                 :autosize="{ minRows: 15 }"

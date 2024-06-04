@@ -8,13 +8,13 @@
           <router-link
             to="/articles"
             class="text-gray-800 text-xl font-bold md:text-2xl"
-            >Meraki <span class="text-blue-500">UI</span></router-link
+            >i<span class="text-blue-500">Blog</span></router-link
           >
-          <router-link
+          <!-- <router-link
             to="/signin"
             class="text-gray-800 text-xl font-bold md:text-2xl ml-5"
             >signin
-          </router-link>
+          </router-link> -->
         </div>
         <div>
           <button
@@ -34,13 +34,6 @@
         class="flex flex-col md:flex-row md:-mx-4"
         :class="isOpen ? 'block' : ['hidden', 'md:block']"
       >
-        <router-link
-          to="/new-article"
-          new-article
-          class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0"
-          href="#"
-          >Write</router-link
-        >
         <!-- <a
           class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0"
           href="#"
@@ -58,12 +51,18 @@
         > -->
         <!-- is user login -->
         <template v-if="isAuthenticated">
+          <router-link
+            to="/new-article"
+            new-article
+            class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0"
+            >寫文章</router-link
+          >
           <span>
             <router-link
               :to="{ name: 'user', params: { id: currentUser.id } }"
               class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0"
             >
-              Hi, {{ currentUser.name || '使用者' }}
+              您好, {{ currentUser.name || '使用者' }}
             </router-link>
           </span>
           <span class="text-orange-500">{{ currentUser.permission }}</span>

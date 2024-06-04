@@ -22,17 +22,16 @@
       <router-link
         :to="{ name: 'article', params: { id: data.id } }"
         class="text-blue-500 hover:underline"
-        href="#"
         >Read more</router-link
       >
       <div>
-        <a class="flex items-center" href="#">
+        <a class="flex items-center">
           <!-- <img
             class="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block"
             :src="data.image"
             alt="avatar"
           /> -->
-          <h1 class="text-gray-700 font-bold hover:underline">
+          <h1 class="text-gray-700 font-bold cursor-auto">
             {{ data.User.name }}
           </h1>
           <template v-if="currentUser.id !== data.User.id">
