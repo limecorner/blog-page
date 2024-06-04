@@ -1,5 +1,5 @@
 <template>
-  <div class="font-roboto bg-gray-100">
+  <div class="font-roboto bg-gray-100 overflow-auto" style="height: 80%;">
     <div class="px-6 py-8">
       <div class="flex justify-between container mx-auto">
         <div class="w-full lg:w-8/12">
@@ -30,7 +30,7 @@
             <el-form-item label="內容">
               <el-input
                 type="textarea"
-                :autosize="{ minRows: 15 }"
+                :autosize="{ minRows: 12 }"
                 v-model="form.content"
               ></el-input>
             </el-form-item>
