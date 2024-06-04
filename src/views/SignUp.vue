@@ -1,9 +1,7 @@
 <template>
-  <div class="container py-3 mx-auto">
+  <div class="container py-3 mx-auto overflow-auto" style="height: 80%;">
     <section class="bg-white dark:bg-gray-900">
-      <div
-        class="container flex items-center justify-center min-h-screen px-6 mx-auto"
-      >
+      <div class="container flex items-center justify-center px-6 py-6 mx-auto">
         <form class="w-full max-w-md" @submit.prevent.stop="handleSubmit">
           <div class="flex justify-center mx-auto">
             <img
@@ -18,14 +16,14 @@
               to="/signin"
               class="w-1/3 pb-4 font-medium text-center text-gray-500 capitalize border-b dark:border-gray-400 dark:text-gray-300"
             >
-              sign in
+              登入
             </router-link>
 
             <router-link
               to="/signup"
               class="w-1/3 pb-4 font-medium text-center text-gray-800 capitalize border-b-2 border-blue-500 dark:border-blue-400 dark:text-white"
             >
-              sign up
+              註冊
             </router-link>
           </div>
 
@@ -51,7 +49,7 @@
               id="name"
               v-model="name"
               name="name"
-              placeholder="Username"
+              placeholder="使用者名稱"
               type="text"
               required
               class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
@@ -109,7 +107,7 @@
               id="password"
               v-model="password"
               name="password"
-              placeholder="Password"
+              placeholder="密碼"
               type="password"
               required
               class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
@@ -138,7 +136,7 @@
               id="passwordCheck"
               v-model="passwordCheck"
               name="passwordCheck"
-              placeholder="Confirm Password"
+              placeholder="再次輸入密碼"
               type="password"
               required
               class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
@@ -154,7 +152,7 @@
               v-else
               class="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
             >
-              Sign Up
+              註冊
             </button>
 
             <div class="mt-6 text-center ">
@@ -162,7 +160,7 @@
                 to="/signin"
                 class="text-sm text-blue-500 hover:underline dark:text-blue-400"
               >
-                Already have an account?
+                已經有帳號了嗎?
               </router-link>
             </div>
           </div>

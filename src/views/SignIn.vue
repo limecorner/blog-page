@@ -1,5 +1,5 @@
 <template>
-  <div class="container py-5 mx-auto mt-40">
+  <div class="container py-5 mx-auto mt-20">
     <div
       class="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 lg:max-w-4xl"
     >
