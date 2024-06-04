@@ -34,3 +34,4 @@ const relativeTime = require('dayjs/plugin/relativeTime')
 dayjs.extend(relativeTime)
 
 export const relativeTimeFromNow = (a) => dayjs(a).fromNow()
+export const currentYear = () => dayjs().year()
