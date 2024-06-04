@@ -18,7 +18,7 @@
                 </a>
               </div> -->
               <div class="">
-                <h2 class="text-gray-700 font-bold hover:underline">
+                <h2 class="text-gray-700 font-bold">
                   {{ article.User.name }}
                 </h2>
 
