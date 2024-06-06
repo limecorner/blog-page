@@ -1,5 +1,9 @@
 <template>
-  <div class="font-roboto bg-gray-100 overflow-auto" style="height: 80%;">
+  <div
+    class="font-roboto bg-gray-100 overflow-scroll"
+    style="height: 80%;"
+    @scroll="handleScroll"
+  >
     <div class="px-6 py-8">
       <div class="flex justify-between container mx-auto">
         <div class="w-full lg:w-8/12">
@@ -61,13 +65,15 @@ export default {
     }
   },
   methods: {
-    async fetchArticles() {
+    async fetchArticles(limit, offset) {
       try {
         this.isLoading = true
+        const queryString = `?limit=${limit}&offset=${offset}`
 
-        const { data } = await articlesAPI.getArticles()
+        const { data } = await articlesAPI.getArticles(queryString)
+        console.log('dataQQ', data)
         if (data.success === true) {
-          this.posts = data.articles
+          return data.articles
         }
 
         this.isLoading = false
@@ -78,10 +84,33 @@ export default {
           title: '無法取得文章，請稍後再試'
         })
       }
+    },
+    async handleScroll(e) {
+      // console.log('scrollTop', e.srcElement.scrollTop)
+      // console.log('offsetHeight', e.srcElement.offsetHeight)
+      // console.log('scrollHeight', e.srcElement.scrollHeight)
+      console.log(
+        'scrollTop + offsetHeight',
+        e.srcElement.scrollTop + e.srcElement.offsetHeight
+      )
+
+      // console.log('scrollHeight', e.srcElement.scrollHeight)
+      // 顶部距离+当前滚动的高度>=滚动条的总高度
+      let bottomOfWindow =
+        e.srcElement.scrollTop + e.srcElement.offsetHeight >
+        e.srcElement.scrollHeight + 15
+      // return [dummy 一筆-> dummy 多筆-> 我的 api]
+      if (bottomOfWindow) {
+        console.log('QQQQQQQQQQQQQQQQQQ')
+
+        const newArticles = await this.fetchArticles(3, this.posts.length)
+        this.posts.push(...newArticles)
+      }
     }
   },
-  created() {
-    this.fetchArticles()
+  async created() {
+    this.posts = await this.fetchArticles(3, 0)
+    window.addEventListener('scroll', this.handleScroll)
   }
 }
 </script>
