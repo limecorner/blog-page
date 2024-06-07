@@ -15,6 +15,11 @@
             class="text-gray-800 text-xl font-bold md:text-2xl ml-5"
             >signin
           </router-link> -->
+          <router-link
+            to="/articles-load-all"
+            class="text-gray-800 text-xl font-bold md:text-2xl ml-5"
+            >一次載入所有文章
+          </router-link>
         </div>
         <div>
           <button
