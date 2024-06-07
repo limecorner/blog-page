@@ -34,6 +34,11 @@ const routes = [
     component: () => import('../views/ArticlesLoadAll.vue')
   },
   {
+    path: '/articles-infinite-scroll',
+    name: 'articles-infinite-scroll',
+    component: () => import('../views/ArticlesInfiniteScroll.vue')
+  },
+  {
     path: '/articles/:id',
     name: 'article',
     component: () => import('../views/Article.vue')

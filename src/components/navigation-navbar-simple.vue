@@ -20,6 +20,11 @@
             class="text-gray-800 text-xl font-bold md:text-2xl ml-5"
             >一次載入所有文章
           </router-link>
+          <router-link
+            to="/articles-infinite-scroll"
+            class="text-gray-800 text-xl font-bold md:text-2xl ml-5"
+            >無限滾動
+          </router-link>
         </div>
         <div>
           <button
