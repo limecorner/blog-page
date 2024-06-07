@@ -73,7 +73,6 @@ export default {
   },
   async created() {
     this.posts = await this.fetchArticles(3, 0)
-    window.addEventListener('scroll', this.handleScroll)
   }
 }
 </script>
