@@ -15,6 +15,7 @@
             <div class="mt-6" v-for="post in posts" :key="post.id">
               <post :data="post"></post>
             </div>
+            <p v-show="isLoading" class="mt-5 text-center">取得更多文章中</p>
           </div>
           <!-- <div class="mt-8">
             <Pagination></Pagination>
@@ -86,23 +87,12 @@ export default {
       }
     },
     async handleScroll(e) {
-      // console.log('scrollTop', e.srcElement.scrollTop)
-      // console.log('offsetHeight', e.srcElement.offsetHeight)
-      // console.log('scrollHeight', e.srcElement.scrollHeight)
-      console.log(
-        'scrollTop + offsetHeight',
-        e.srcElement.scrollTop + e.srcElement.offsetHeight
-      )
-
-      // console.log('scrollHeight', e.srcElement.scrollHeight)
-      // 顶部距离+当前滚动的高度>=滚动条的总高度
+      // https://javascript.info/size-and-scroll
       let bottomOfWindow =
-        e.srcElement.scrollTop + e.srcElement.offsetHeight >
-        e.srcElement.scrollHeight + 15
-      // return [dummy 一筆-> dummy 多筆-> 我的 api]
-      if (bottomOfWindow) {
-        console.log('QQQQQQQQQQQQQQQQQQ')
+        e.srcElement.scrollTop + e.srcElement.clientHeight ===
+        e.srcElement.scrollHeight
 
+      if (bottomOfWindow) {
         const newArticles = await this.fetchArticles(3, this.posts.length)
         this.posts.push(...newArticles)
       }
