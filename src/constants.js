@@ -1,4 +1,6 @@
-const permissions = ['guest', 'login', 'member']
+const permissions = ['login']
+const permissionsWithMember = ['login', 'member']
+
 const categories = [
   { id: 5, name: 'ExpressJS' },
   { id: 6, name: 'MySQL' },
@@ -10,4 +12,4 @@ const categories = [
   { id: 12, name: 'JavaScript' }
 ]
 
-export { permissions, categories }
+export { permissions, permissionsWithMember, categories }

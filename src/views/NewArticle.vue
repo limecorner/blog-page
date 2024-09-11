@@ -55,7 +55,8 @@
 </template>
 
 <script>
-import { permissions } from './../constants'
+import { mapState } from 'vuex'
+import { permissions, permissionsWithMember } from './../constants'
 import articlesAPI from './../apis/articles'
 import categoriesAPI from './../apis/categories'
 import { Toast } from './../utils/helpers'
@@ -73,7 +74,7 @@ export default {
       },
       isProcessing: false,
       categories: [],
-      permissions
+      permissions: []
     }
   },
   methods: {
@@ -122,10 +123,20 @@ export default {
           title: '無法取得分類，請稍後再試'
         })
       }
+    },
+    fetchPermissions() {
+      this.permissions =
+        this.currentUser.permission === 'member'
+          ? permissionsWithMember
+          : permissions
     }
+  },
+  computed: {
+    ...mapState(['currentUser'])
   },
   created() {
     this.fetchCategories()
+    this.fetchPermissions()
   }
 }
 </script>
