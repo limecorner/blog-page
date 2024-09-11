@@ -65,7 +65,15 @@
               您好, {{ currentUser.name || '使用者' }}
             </router-link>
           </span>
-          <span class="text-orange-500">{{ currentUser.permission }}</span>
+          <router-link
+            to="/edit/user"
+            new-article
+            class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0"
+            >編輯個人資料</router-link
+          >
+          <span class="text-orange-500"
+            >權限: {{ currentUser.permission }}</span
+          >
           <span>
             <button
               type="button"

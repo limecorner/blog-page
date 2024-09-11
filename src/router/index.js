@@ -54,6 +54,11 @@ const routes = [
     component: () => import('../views/User.vue')
   },
   {
+    path: '/edit/user',
+    name: 'edit-user',
+    component: () => import('../views/EditUser.vue')
+  },
+  {
     path: '/admin',
     exact: true,
     redirect: '/admin/articles'

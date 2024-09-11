@@ -6,5 +6,8 @@ export default {
   },
   getUser(id) {
     return apiHelper.get(`/users/${id}`)
+  },
+  editUserInfo(id, formData) {
+    return apiHelper.put(`/users/${id}`, formData)
   }
 }
