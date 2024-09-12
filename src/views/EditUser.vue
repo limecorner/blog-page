@@ -71,18 +71,26 @@
             />
           </div>
 
-          <div>
+          <div class="mt-4">
             <label
-              for="image"
+              for="photo"
               class="block text-sm text-gray-500 dark:text-gray-300"
-              >Image</label
+              >Photo</label
             >
 
             <input
               type="file"
               name="photo"
               class="block w-full px-3 py-2 mt-2 text-sm text-gray-600 bg-white border border-gray-200 rounded-lg file:bg-gray-200 file:text-gray-700 file:text-sm file:px-4 file:py-1 file:border-none file:rounded-full dark:file:bg-gray-800 dark:file:text-gray-200 dark:text-gray-300 placeholder-gray-400/70 dark:placeholder-gray-500 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:focus:border-blue-300"
+              @change="handleFileChange"
             />
+
+            <div class="flex justify-center items-center mt-4">
+              <img
+                :src="currentUser.photo"
+                class="mx-4 w-20 h-20 object-cover rounded-full hidden sm:block"
+              />
+            </div>
           </div>
 
           <div class="mt-6">
@@ -108,6 +116,7 @@ import { mapState } from 'vuex'
 import usersAPI from './../apis/users'
 import { Toast } from './../utils/helpers'
 import LittleSpinner from './../components/little-spinner.vue'
+import store from './../store'
 
 export default {
   components: {
@@ -139,7 +148,7 @@ export default {
           this.currentUser.id,
           formData
         )
-
+        await store.dispatch('fetchCurrentUser')
         if (data.success === true) {
           Toast.fire({
             icon: 'success',
@@ -155,10 +164,27 @@ export default {
           title: `編輯個人資料失敗`
         })
       }
+    },
+    handleFileChange(e) {
+      const files = e.target.files
+      if (files.length === 0) {
+        // 使用者沒有選擇上傳的檔案
+        this.currentUser.photo = ''
+        return
+      } else {
+        // 否則產生預覽圖
+        const imageURL = window.URL.createObjectURL(files[0])
+        this.currentUser.photo = imageURL
+      }
     }
   },
   computed: {
     ...mapState(['currentUser'])
+  },
+  async created() {
+    await store.dispatch('fetchCurrentUser')
+    this.name = this.currentUser.name
+    this.bio = this.currentUser.bio
   }
 }
 </script>
