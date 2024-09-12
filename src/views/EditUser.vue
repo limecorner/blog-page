@@ -87,6 +87,12 @@
 
             <div class="flex justify-center items-center mt-4">
               <img
+                v-if="tempPhoto"
+                :src="tempPhoto"
+                class="mx-4 w-20 h-20 object-cover rounded-full hidden sm:block"
+              />
+              <img
+                v-else
                 :src="currentUser.photo"
                 class="mx-4 w-20 h-20 object-cover rounded-full hidden sm:block"
               />
@@ -126,6 +132,7 @@ export default {
     return {
       name: '',
       bio: '',
+      tempPhoto: '',
       isProcessing: false
     }
   },
@@ -174,7 +181,7 @@ export default {
       } else {
         // 否則產生預覽圖
         const imageURL = window.URL.createObjectURL(files[0])
-        this.currentUser.photo = imageURL
+        this.tempPhoto = imageURL
       }
     }
   },
@@ -182,7 +189,6 @@ export default {
     ...mapState(['currentUser'])
   },
   async created() {
-    await store.dispatch('fetchCurrentUser')
     this.name = this.currentUser.name
     this.bio = this.currentUser.bio
   }
