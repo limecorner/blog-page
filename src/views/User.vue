@@ -7,6 +7,7 @@
             <h1 class="text-xl font-bold text-gray-700 md:text-2xl">
               {{ currentUser.name }}
             </h1>
+
             <!-- <post-filter></post-filter> -->
           </div>
           <div class="post-container">
@@ -17,9 +18,16 @@
         </div>
         <div class="-mx-8 w-4/12 hidden lg:block">
           <div class="px-8">
-            <h1 class="mb-4 text-xl font-bold text-gray-700">
-              {{ currentUser.name }}
-            </h1>
+            <div class="flex items-center mb-3">
+              <img
+                class="w-10 h-10 object-cover rounded-full mx-4"
+                :src="currentUser.photo"
+                alt="avatar"
+              />
+              <h1 class="text-xl font-bold text-gray-700">
+                {{ currentUser.name }}
+              </h1>
+            </div>
             <p>{{ currentUser.Fans.length }} Followers</p>
             <p>{{ currentUser.bio }}</p>
           </div>

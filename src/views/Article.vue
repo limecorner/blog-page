@@ -8,15 +8,15 @@
               <h1 class="text-4xl text-gray-700 font-bold">
                 {{ article.title }}
               </h1>
-              <!-- <div>
+              <div>
                 <a class="flex items-center" href="#">
                   <img
                     class="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block"
-                    :src="article.image"
+                    :src="article.User.photo"
                     alt="avatar"
                   />
                 </a>
-              </div> -->
+              </div>
               <div class="">
                 <h2 class="text-gray-700 font-bold">
                   {{ article.User.name }}
