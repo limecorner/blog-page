@@ -176,7 +176,7 @@ export default {
       const files = e.target.files
       if (files.length === 0) {
         // 使用者沒有選擇上傳的檔案
-        this.currentUser.photo = ''
+        this.tempPhoto = ''
         return
       } else {
         // 否則產生預覽圖

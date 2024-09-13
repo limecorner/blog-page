@@ -11,7 +11,7 @@
               <div class="flex items-center">
                 <img
                   class="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block"
-                  :src="article.User.photo"
+                  :src="article.User.photo || fakePhoto"
                   alt="avatar"
                 />
                 <h2 class="text-gray-700 font-bold">
@@ -145,7 +145,7 @@
               <div class="flex items-center">
                 <img
                   class="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block"
-                  :src="User.photo"
+                  :src="User.photo || fakePhoto"
                   alt="avatar"
                 />
                 <h2 class="text-gray-700 font-bold hover:underline">
@@ -213,6 +213,7 @@ import responsesAPI from './../apis/responses'
 import { Toast, relativeTimeFromNow } from './../utils/helpers'
 import { mapState } from 'vuex'
 import Swal from 'sweetalert2'
+import { fakePhoto } from './../constants'
 
 export default {
   name: 'Article',
@@ -246,7 +247,8 @@ export default {
       editResponseContent: '',
       reviseForm: {
         content: ''
-      }
+      },
+      fakePhoto
     }
   },
   created() {

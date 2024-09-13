@@ -6,7 +6,7 @@
       <li class="flex items-center">
         <img
           class="w-10 h-10 object-cover rounded-full mx-4"
-          :src="data.photo"
+          :src="data.photo || fakePhoto"
           alt="avatar"
         />
         <p>
@@ -27,9 +27,15 @@
 import { mapState } from 'vuex'
 import followshipsAPI from './../apis/followships'
 import { Toast } from './../utils/helpers'
+import { fakePhoto } from './../constants'
 
 export default {
   props: ['data'],
+  data() {
+    return {
+      fakePhoto
+    }
+  },
   methods: {
     async removeIdol(id) {
       try {

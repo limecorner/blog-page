@@ -28,7 +28,7 @@
         <a class="flex items-center">
           <img
             class="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block"
-            :src="data.User.photo"
+            :src="data.User.photo || fakePhoto"
             alt="avatar"
           />
           <h1 class="text-gray-700 font-bold cursor-auto">
@@ -61,11 +61,13 @@ import { mapState } from 'vuex'
 import { relativeTimeFromNow } from './../utils/helpers'
 import followshipsAPI from './../apis/followships'
 import { Toast } from './../utils/helpers'
+import { fakePhoto } from './../constants'
 
 export default {
   data() {
     return {
-      relativeTimeFromNow
+      relativeTimeFromNow,
+      fakePhoto
     }
   },
   methods: {

@@ -21,7 +21,7 @@
             <div class="flex items-center mb-3">
               <img
                 class="w-10 h-10 object-cover rounded-full mx-4"
-                :src="currentUser.photo"
+                :src="currentUser.photo || fakePhoto"
                 alt="avatar"
               />
               <h1 class="text-xl font-bold text-gray-700">
@@ -53,6 +53,7 @@ import articlesAPI from './../apis/articles'
 // import responsesAPI from './../apis/responses'
 import { Toast } from './../utils/helpers'
 import { mapState } from 'vuex'
+import { fakePhoto } from './../constants'
 
 export default {
   name: 'User',
@@ -63,7 +64,8 @@ export default {
   },
   data() {
     return {
-      posts: []
+      posts: [],
+      fakePhoto
     }
   },
   methods: {
