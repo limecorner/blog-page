@@ -8,20 +8,17 @@
               <h1 class="text-4xl text-gray-700 font-bold">
                 {{ article.title }}
               </h1>
-              <div>
-                <a class="flex items-center" href="#">
-                  <img
-                    class="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block"
-                    :src="article.User.photo"
-                    alt="avatar"
-                  />
-                </a>
-              </div>
-              <div class="">
+              <div class="flex items-center">
+                <img
+                  class="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block"
+                  :src="article.User.photo"
+                  alt="avatar"
+                />
                 <h2 class="text-gray-700 font-bold">
                   {{ article.User.name }}
                 </h2>
-
+              </div>
+              <div class="">
                 <!-- <a
                   class="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500"
                   href="#"
@@ -145,14 +142,19 @@
                 </a>
               </div> -->
 
-              <div class="">
+              <div class="flex items-center">
+                <img
+                  class="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block"
+                  :src="User.photo"
+                  alt="avatar"
+                />
                 <h2 class="text-gray-700 font-bold hover:underline">
                   {{ User.name }}
                 </h2>
-                <span class="font-light text-gray-600">{{
-                  relativeTimeFromNow(createdAt)
-                }}</span>
               </div>
+              <span class="font-light text-gray-600">{{
+                relativeTimeFromNow(createdAt)
+              }}</span>
               <h1 class="text-2xl text-gray-700">
                 {{ content }}
               </h1>
